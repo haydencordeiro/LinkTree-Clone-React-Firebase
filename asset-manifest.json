@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/linkbio-React/static/css/main.9f5d3117.chunk.css",
-    "main.js": "/linkbio-React/static/js/main.a5c761a5.chunk.js",
-    "main.js.map": "/linkbio-React/static/js/main.a5c761a5.chunk.js.map",
+    "main.js": "/linkbio-React/static/js/main.9b5fd259.chunk.js",
+    "main.js.map": "/linkbio-React/static/js/main.9b5fd259.chunk.js.map",
     "runtime-main.js": "/linkbio-React/static/js/runtime-main.dd99233d.js",
     "runtime-main.js.map": "/linkbio-React/static/js/runtime-main.dd99233d.js.map",
-    "static/js/2.c8b44bc2.chunk.js": "/linkbio-React/static/js/2.c8b44bc2.chunk.js",
-    "static/js/2.c8b44bc2.chunk.js.map": "/linkbio-React/static/js/2.c8b44bc2.chunk.js.map",
+    "static/js/2.2c4743d0.chunk.js": "/linkbio-React/static/js/2.2c4743d0.chunk.js",
+    "static/js/2.2c4743d0.chunk.js.map": "/linkbio-React/static/js/2.2c4743d0.chunk.js.map",
     "index.html": "/linkbio-React/index.html",
     "static/css/main.9f5d3117.chunk.css.map": "/linkbio-React/static/css/main.9f5d3117.chunk.css.map",
-    "static/js/2.c8b44bc2.chunk.js.LICENSE.txt": "/linkbio-React/static/js/2.c8b44bc2.chunk.js.LICENSE.txt"
+    "static/js/2.2c4743d0.chunk.js.LICENSE.txt": "/linkbio-React/static/js/2.2c4743d0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.dd99233d.js",
-    "static/js/2.c8b44bc2.chunk.js",
+    "static/js/2.2c4743d0.chunk.js",
     "static/css/main.9f5d3117.chunk.css",
-    "static/js/main.a5c761a5.chunk.js"
+    "static/js/main.9b5fd259.chunk.js"
   ]
 }
