@@ -3,7 +3,8 @@ import React,{ useState,useEffect } from 'react';
 import {auth,provider,overwriteToFireBase,db,signOutGoogle} from '../firebase'
 import firebase from "firebase/app";
 import Links from './links';
-
+import LinksShare from './linksShare';
+import { BrowserRouter, Route, Link ,Switch,Redirect } from "react-router-dom";
 export const UserContext =React.createContext();
 const testUser=   {
   uid:'JVBBbvlceTVpasCdTRG285NmsyF3',
@@ -16,6 +17,7 @@ function Login() {
 
   // States
 const [user,setuser]=useState();
+const [loggedInuser,setLoggedIn]=useState(false);
 
 // End States
 
@@ -32,6 +34,7 @@ function signInWithGoogle() {
     
 
     setuser(tempuser)
+    setLoggedIn(true)
   }
     );
 };
@@ -48,10 +51,12 @@ useEffect(
           photoURL:authUser.photoURL
         }
     setuser(tempuser);
+    setLoggedIn(true)
 
       }
       else{
         setuser(null);
+        setLoggedIn(false)
 
 
       }
@@ -62,30 +67,47 @@ useEffect(
 
 
 
+function PrivateRoute ({user ,LoggedIn,notLogged}) {
+    if(user){
+        console.log("hasdf")
+        
+        return LoggedIn
+    }
+    else{
+        console.log("ag")
 
+        return notLogged
+    }
+  }
   
   
 
-// End Functions
+
+ function UserIdGet(){
+     return (loggedInuser ? user.uid:null)
+ }
 
 
 
-
-// End Use Effect
   return (
-
   <>
   {
 
-user?
+
 // logged in
 <UserContext.Provider  value={[user]}>
-<Links signOutGoogle={signOutGoogle}></Links>
-</UserContext.Provider>:
+<BrowserRouter  >
+    <Switch>
 
-// logged out
-<button onClick={signInWithGoogle} style={{position:'absolute',top:'50%',left:'50%',backgroundColor:'#ccc',border:'none',padding:'1rem',transform: 'translate(-50%, -50%)'}}>Sign in with google</button>
 
+
+    <Route  path="/:user" component={() => <LinksShare  loggedIn={loggedInuser}  />} />
+    <PrivateRoute path='/'  user={loggedInuser} LoggedIn={<Redirect to={'/' +UserIdGet()   }  />} notLogged={<button onClick={signInWithGoogle} style={{position:'absolute',top:'50%',left:'50%',backgroundColor:'#ccc',border:'none',padding:'1rem',transform: 'translate(-50%, -50%)'}}>Sign in with google</button>} />
+
+
+    </Switch>
+</BrowserRouter>
+</UserContext.Provider>
 
   }
 

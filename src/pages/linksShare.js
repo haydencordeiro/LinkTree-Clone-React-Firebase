@@ -1,32 +1,20 @@
 import React,{useContext,useEffect,useState,useRef} from 'react'
 import {UserContext} from './Login';
 import { pushToFireBase,getDataFromCollection ,db} from '../firebase';
+import Links from './links';
+import {useParams , NavLink, Link} from 'react-router-dom'
+ function LinksShare({loggedIn}) {
+    // console.log("Linkshare")
+
+    const {user} =useParams();
+    // console.log(user)
 
 
- function Links({signOutGoogle}) {
-    console.log("Link")
-
-
-    function AddLink(){
-        var name=prompt("Enter Name");
-        var link=prompt("Enter Link");
-        console.log(user.uid)
-        pushToFireBase({name:name,link:link},user.uid)
-    
-    }
-    function DeleteLink(id){
-        // console.log(id)
-        db.collection(String(user.uid)).doc(String(id)).delete();
-
-    }
-
-
-    var user=useContext(UserContext)[0];
     var [LinkList,SetLinkList] = useState([]);
+    var [mypage,setMypage] = useState(false);
     useEffect(()=>{
         if(user!=null){
-        db.collection(String(user.uid))
-        // .orderBy('createdat','asc')
+        db.collection(String(user))
         .onSnapshot(result=>{
             SetLinkList(
           result.docs.map((doc)=>(
@@ -38,16 +26,22 @@ import { pushToFireBase,getDataFromCollection ,db} from '../firebase';
 
 
 
-    return (
+ 
+    if(mypage){
+        return  <Links />
+    }
+    else {
+        return (
+        
 
       
     <div className="container OuterBox">
+        { loggedIn ? <a   onClick={() => setMypage(true)} > My Links</a> :null }
+        
         <div className="row text-center">
             <div className="col-md-12" style={{display:"flex",justifyContent:'space-around'}}>
-                <h1 >{user.displayName} Link's</h1>
-                <a onClick={signOutGoogle} className="fa fa-sign-out" >Logout</a >
-                <a onClick={AddLink} className="fa fa-plus" >Add</a >
-                
+                <h1 style={{textAlign:"center"}} > Link's</h1>
+
             </div>
             
         </div>
@@ -58,7 +52,7 @@ import { pushToFireBase,getDataFromCollection ,db} from '../firebase';
                     return (
                         <div className="col-12 linkField" key={ index }>
                         <button className="linkButton"><a href={obj.data.link} target="_blank">{obj.data.name}</a></button>
-                        <a className="fa fa-trash" onClick={()=>DeleteLink(obj.id)} id={obj.id}></a>
+                      
                         </div>
         
                     )
@@ -76,6 +70,7 @@ import { pushToFireBase,getDataFromCollection ,db} from '../firebase';
 
 
     )
+        }
 }
 
-export default Links
+export default LinksShare
